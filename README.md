@@ -10,8 +10,7 @@ Ein kleines, aber durchdachtes Beispielprojekt zur Demonstration moderner Softwa
 
 ## 🏁 Ziel
 
-Dieses Projekt wurde von **Michael Nahberger** entwickelt, um im Rahmen meiner Bewerbung
-folgendes zu demonstrieren:
+Dieses Projekt wurde von **Michael Nahberger** entwickelt, um folgendes zu demonstrieren:
 
 - Saubere Architektur
 - REST-APIs mit Quarkus effizient strukturiert,
