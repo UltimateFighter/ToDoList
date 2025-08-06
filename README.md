@@ -14,7 +14,7 @@ Dieses Projekt wurde von **Michael Nahberger** entwickelt, um folgendes zu demon
 
 - Saubere Architektur
 - REST-APIs mit Quarkus effizient strukturiert,
-- Solides Test-, Tracing und Logging-Setup aufbaut.
+- Solides Test-, Tracing und Logging-Setup
 - Daten werden über Mappings zwischen Schichten weitergereicht,
 
 ---
