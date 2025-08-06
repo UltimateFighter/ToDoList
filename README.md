@@ -26,7 +26,6 @@ Die Anwendung folgt der  **Hexagonalen Architektur** mit klarer Trennung zwische
 - `domain`: Reine Geschäftslogik (Service-Schicht)
 - `web.rest` Adapter für REST
 - `persistence`: Adapter für die Persistence
-- `infrastructure`: Logging, Exception Handling etc.
 
 ---
 
