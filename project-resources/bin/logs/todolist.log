@@ -1,4 +1,0 @@
-2025-08-06 12:12:32 [INFO] [] [c.n.t.i.Initializer] ToDo List started.
-2025-08-06 12:12:32 [INFO] [] [i.quarkus] todolist 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.25.0) started in 1.458s. Listening on: http://0.0.0.0:8080
-2025-08-06 12:12:32 [INFO] [] [i.quarkus] Profile prod activated. 
-2025-08-06 12:12:32 [INFO] [] [i.quarkus] Installed features: [cdi, config-yaml, hibernate-validator, rest, rest-jackson, smallrye-context-propagation, smallrye-health, vertx]
