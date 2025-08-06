@@ -1,0 +1,606 @@
+{
+	"info": {
+		"_postman_id": "68d436b8-eead-4fcd-9e96-93026273cd4c",
+		"name": "ToDoList API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47283635",
+		"_collection_link": "https://michael-nahberger-8954733.postman.co/workspace/Michael-Nahberger's-Workspace~a9d36cc6-f3e5-40a8-8cf3-a0ac86756347/collection/47283635-68d436b8-eead-4fcd-9e96-93026273cd4c?action=share&source=collection_link&creator=47283635"
+	},
+	"item": [
+		{
+			"name": "Scenario: ToDo Workflow",
+			"item": [
+				{
+					"name": "Scenario 1 - Create first ToDo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 201 Created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"// Store created ToDo ID for later",
+									"const json = pm.response.json();",
+									"pm.environment.set(\"todoId1\", json.id);",
+									"console.log(\"todoId1 se to: \", json.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"description\":\"First ToDo\",\"dueDate\":\"10.08.2025\"}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario 2 - Get all ToDos and verify count 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"const todos = pm.response.json();",
+									"pm.test(\"Exactly 1 ToDo in list\", function() {",
+									"    pm.expect(todos.length).to.eql(1);",
+									"});",
+									"pm.test(\"Due date of first item is correct\", function() {",
+									"    pm.expect(todos[0].dueDate).to.eql(\"10.08.2025\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario 3 - Create duplicate dueDate and expect 409",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 409 Conflict\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"description\":\"Duplicate ToDo\",\"dueDate\":\"10.08.2025\"}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario 4 - Create second ToDo with next day",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 201 Created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"// Store created ToDo ID for later",
+									"const json = pm.response.json();",
+									"pm.environment.set(\"todoId2\", json.id);",
+									"console.log(\"todoId2 set to: \", json.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"description\":\"Second ToDo\",\"dueDate\":\"11.08.2025\"}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario 5 - Get all ToDos sorted desc and verify order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"const todos = pm.response.json();",
+									"pm.test(\"Verify sorting descending by dueDate\", function () {",
+									"    pm.expect(todos.length).to.be.above(1);",
+									"    const dates = todos.map(todo => todo.dueDate);",
+									"    for(let i=0; i<dates.length-1; i++) {",
+									"        pm.expect(dates[i] >= dates[i+1]).to.be.true;",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos?sortOrder=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos"
+							],
+							"query": [
+								{
+									"key": "sortOrder",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario 6 - Get all ToDos sorted asc and verify order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"const todos = pm.response.json();",
+									"pm.test(\"Verify sorting ascending by dueDate\", function () {",
+									"    pm.expect(todos.length).to.be.above(1);",
+									"    const dates = todos.map(todo => todo.dueDate);",
+									"    for(let i=0; i<dates.length-1; i++) {",
+									"        pm.expect(dates[i] <= dates[i+1]).to.be.true;",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos?sortOrder=asc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos"
+							],
+							"query": [
+								{
+									"key": "sortOrder",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario 7 - Delete first ToDo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Requested",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos/{{todoId1}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos",
+								"{{todoId1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario 8 - Delete same ToDo again and expect 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 404 Not Found\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Requested",
+								"value": ""
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos/{{todoId1}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos",
+								"{{todoId1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario 9 - Get all ToDos and verify only one remains",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"const todos = pm.response.json();",
+									"pm.test(\"Exactly 1 ToDo remains\", function() {",
+									"    pm.expect(todos.length).to.eql(1);",
+									"});",
+									"",
+									"const todoId2 = pm.environment.get(\"todoId2\");",
+									"pm.environment.set(\"todoId2\", todoId2)",
+									"",
+									"pm.test(\"Remaining ToDo is the second one\", function() {",
+									"    pm.expect(todos[0].id).to.eql(todoId2);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Scenario 10 - Delete Second ToDo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(\"todoId1 is: \", pm.environment.get(\"todoId1\"));",
+									"console.log(\"todoId2 is: \", pm.environment.get(\"todoId2\"));",
+									"",
+									"pm.test(\"Status is 204 No Content\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/todos/{{todoId2}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"todos",
+								"{{todoId2}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create ToDo Entry",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Requested",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"Test ToDo Item\",\r\n    \"dueDate\":\"02.08.2025\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/todos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All ToDo Entries (Sort Ascending)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Requested",
+						"value": ""
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/todos?sortOrder=asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"todos"
+					],
+					"query": [
+						{
+							"key": "sortOrder",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All ToDo Entries (Sort Descending)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Requested",
+						"value": ""
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/todos?sortOrder=foo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"todos"
+					],
+					"query": [
+						{
+							"key": "sortOrder",
+							"value": "foo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete ToDo Entry",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Requested",
+						"value": ""
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/todos/2025-08-02",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"todos",
+						"2025-08-02"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/q/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"q",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

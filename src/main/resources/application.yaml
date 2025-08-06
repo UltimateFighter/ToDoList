@@ -1,0 +1,20 @@
+quarkus:
+  http:
+    port: 8080
+  log:
+    level: INFO
+    console:
+      enable: true
+      format: "%d{yyyy-MM-dd HH:mm:ss} [%p] [%X{requestId}] [%c{1.}] %s%e%n"
+    file:
+      enable: true
+      path: logs/todolist.log
+      format: "%d{yyyy-MM-dd HH:mm:ss} [%p] [%X{requestId}] [%c{1.}] %s%e%n"
+  package:
+    jar:
+      type: uber-jar
+
+  smallrye-health:
+    root-path: /q/health
+    liveness-path: /q/health/live
+    readiness-path: /q/health/ready

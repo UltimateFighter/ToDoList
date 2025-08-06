@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run ToDoList (prod)" type="QuarkusMavenBridge">
+    <option name="goals" value="clean compile quarkus:dev -Dquarkus.profile=prod" />
+    <option name="jreName" value="17" />
+    <option name="profiles" />
+    <option name="vmOptions" />
+    <option name="workingDir" value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>

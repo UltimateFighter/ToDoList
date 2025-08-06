@@ -1,0 +1,77 @@
+2025-08-06 10:41:10 [INFO] [io.quarkus.bootstrap.runner.Timing] [] todolist 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.25.0) started in 1.448s. Listening on: http://0.0.0.0:8080
+2025-08-06 10:41:10 [INFO] [io.quarkus.bootstrap.runner.Timing] [] Profile prod activated. 
+2025-08-06 10:41:10 [INFO] [io.quarkus.bootstrap.runner.Timing] [] Installed features: [cdi, config-yaml, hibernate-validator, rest, rest-jackson, smallrye-context-propagation, smallrye-health, vertx]
+2025-08-06 10:41:15 [INFO] [com.nahberger.todolist.domain.ToDoService] [9fe8a802-0fd8-455b-96c5-b1a7b3a2c430] Fetching all ToDo entries with sort order: ASC
+2025-08-06 10:41:15 [INFO] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [9fe8a802-0fd8-455b-96c5-b1a7b3a2c430] Fetching all ToDo entries with sort order: ASC
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [76c0bc17-619b-46f4-8ac6-9e69439825a4] Created new ToDoEntryEntity with ID 2025-08-10
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.domain.ToDoService] [76c0bc17-619b-46f4-8ac6-9e69439825a4] Created new ToDoEntry with ID 2025-08-10
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.domain.ToDoService] [568e68fc-dff2-4d12-91c5-fe993e2bb2f9] Fetching all ToDo entries with sort order: ASC
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [568e68fc-dff2-4d12-91c5-fe993e2bb2f9] Fetching all ToDo entries with sort order: ASC
+2025-08-06 10:41:46 [WARN] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [0ae5516f-957a-490d-aa0c-6e7f2e8b3cf6] Attempt to create ToDoEntry failed: Resource with ID 2025-08-10 already exists
+2025-08-06 10:41:46 [WARN] [com.nahberger.todolist.domain.ToDoService] [0ae5516f-957a-490d-aa0c-6e7f2e8b3cf6] Attempt to create ToDoEntry failed: To do entry with due date '2025-08-10' already exists: com.nahberger.todolist.domain.exception.ResourceAlreadyExistsException: ToDoEntryEntity with ID 2025-08-10 already Exists found
+	at com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository.create(InMemoryToDoListRepository.java:53)
+	at com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository_ClientProxy.create(Unknown Source)
+	at com.nahberger.todolist.domain.ToDoService.create(ToDoService.java:46)
+	at com.nahberger.todolist.domain.ToDoService_ClientProxy.create(Unknown Source)
+	at com.nahberger.todolist.web.rest.ToDoResource.create(ToDoResource.java:46)
+	at com.nahberger.todolist.web.rest.ToDoResource_Subclass.create$$superforward(Unknown Source)
+	at com.nahberger.todolist.web.rest.ToDoResource_Subclass$$function$$1.apply(Unknown Source)
+	at io.quarkus.arc.impl.AroundInvokeInvocationContext.proceed(AroundInvokeInvocationContext.java:73)
+	at io.quarkus.arc.impl.AroundInvokeInvocationContext.proceed(AroundInvokeInvocationContext.java:62)
+	at io.quarkus.hibernate.validator.runtime.interceptor.AbstractMethodValidationInterceptor.validateMethodInvocation(AbstractMethodValidationInterceptor.java:71)
+	at io.quarkus.hibernate.validator.runtime.jaxrs.ResteasyReactiveEndPointValidationInterceptor.validateMethodInvocation(ResteasyReactiveEndPointValidationInterceptor.java:21)
+	at io.quarkus.hibernate.validator.runtime.jaxrs.ResteasyReactiveEndPointValidationInterceptor_Bean.intercept(Unknown Source)
+	at io.quarkus.arc.impl.InterceptorInvocation.invoke(InterceptorInvocation.java:42)
+	at io.quarkus.arc.impl.AroundInvokeInvocationContext.perform(AroundInvokeInvocationContext.java:30)
+	at io.quarkus.arc.impl.InvocationContexts.performAroundInvoke(InvocationContexts.java:27)
+	at com.nahberger.todolist.web.rest.ToDoResource_Subclass.create(Unknown Source)
+	at com.nahberger.todolist.web.rest.ToDoResource_ClientProxy.create(Unknown Source)
+	at com.nahberger.todolist.web.rest.ToDoResource$quarkusrestinvoker$create_95e2ea8da6983142a30dfd50d503e4f80df6a3ee.invoke(Unknown Source)
+	at org.jboss.resteasy.reactive.server.handlers.InvocationHandler.handle(InvocationHandler.java:29)
+	at io.quarkus.resteasy.reactive.server.runtime.QuarkusResteasyReactiveRequestContext.invokeHandler(QuarkusResteasyReactiveRequestContext.java:141)
+	at org.jboss.resteasy.reactive.common.core.AbstractResteasyReactiveContext.run(AbstractResteasyReactiveContext.java:147)
+	at io.quarkus.vertx.core.runtime.VertxCoreRecorder$15.runWith(VertxCoreRecorder.java:645)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.doRunWith(EnhancedQueueExecutor.java:2651)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2630)
+	at org.jboss.threads.EnhancedQueueExecutor.runThreadBody(EnhancedQueueExecutor.java:1622)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1589)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:11)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:11)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+
+2025-08-06 10:41:46 [WARN] [com.nahberger.todolist.web.rest.exception.GenericExceptionMapper] [0ae5516f-957a-490d-aa0c-6e7f2e8b3cf6] Resource conflict: Attempt to create ToDoEntry failed: To do entry with due date '2025-08-10' already exists
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [5e646e2f-53fb-4873-bb1d-09e591a55640] Created new ToDoEntryEntity with ID 2025-08-11
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.domain.ToDoService] [5e646e2f-53fb-4873-bb1d-09e591a55640] Created new ToDoEntry with ID 2025-08-11
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.domain.ToDoService] [5cad72fa-08f8-44ca-af33-83bd0a81792a] Fetching all ToDo entries with sort order: DESC
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [5cad72fa-08f8-44ca-af33-83bd0a81792a] Fetching all ToDo entries with sort order: DESC
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.domain.ToDoService] [dc2a7b78-170d-47b2-946e-3599f117ad98] Fetching all ToDo entries with sort order: DESC
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [dc2a7b78-170d-47b2-946e-3599f117ad98] Fetching all ToDo entries with sort order: DESC
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [3b5698fa-35ac-4702-bff6-09564856ecd8] Deleted ToDoEntryEntity with ID 2025-08-10
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.domain.ToDoService] [3b5698fa-35ac-4702-bff6-09564856ecd8] Deleted ToDoEntry with ID 2025-08-10
+2025-08-06 10:41:46 [WARN] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [b4708503-8711-4884-a15b-9664cd7d897b] Attempt to delete ToDoEntryEntity failed: Resource with ID 2025-08-10 not found
+2025-08-06 10:41:46 [WARN] [com.nahberger.todolist.domain.ToDoService] [b4708503-8711-4884-a15b-9664cd7d897b] Attempt to delete ToDoEntry failed: To do entry with with ID 2025-08-10 not found: com.nahberger.todolist.domain.exception.ResourceNotFoundException: ToDoEntryEntity with ID 2025-08-10 not found
+	at com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository.delete(InMemoryToDoListRepository.java:67)
+	at com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository_ClientProxy.delete(Unknown Source)
+	at com.nahberger.todolist.domain.ToDoService.deleteToDoEntry(ToDoService.java:64)
+	at com.nahberger.todolist.domain.ToDoService.delete(ToDoService.java:58)
+	at com.nahberger.todolist.domain.ToDoService_ClientProxy.delete(Unknown Source)
+	at com.nahberger.todolist.web.rest.ToDoResource.delete(ToDoResource.java:56)
+	at com.nahberger.todolist.web.rest.ToDoResource_ClientProxy.delete(Unknown Source)
+	at com.nahberger.todolist.web.rest.ToDoResource$quarkusrestinvoker$delete_2fcb7b74a2b7f20d433d3242566453489ff715b4.invoke(Unknown Source)
+	at org.jboss.resteasy.reactive.server.handlers.InvocationHandler.handle(InvocationHandler.java:29)
+	at io.quarkus.resteasy.reactive.server.runtime.QuarkusResteasyReactiveRequestContext.invokeHandler(QuarkusResteasyReactiveRequestContext.java:141)
+	at org.jboss.resteasy.reactive.common.core.AbstractResteasyReactiveContext.run(AbstractResteasyReactiveContext.java:147)
+	at io.quarkus.vertx.core.runtime.VertxCoreRecorder$15.runWith(VertxCoreRecorder.java:645)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.doRunWith(EnhancedQueueExecutor.java:2651)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2630)
+	at org.jboss.threads.EnhancedQueueExecutor.runThreadBody(EnhancedQueueExecutor.java:1622)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1589)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:11)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:11)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+
+2025-08-06 10:41:46 [WARN] [com.nahberger.todolist.web.rest.exception.GenericExceptionMapper] [b4708503-8711-4884-a15b-9664cd7d897b] Resource not found: Attempt to delete ToDoEntry failed: To do entry with with ID 2025-08-10 not found
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.domain.ToDoService] [f7dac69b-d649-4d1c-9d88-e004ba6a11db] Fetching all ToDo entries with sort order: ASC
+2025-08-06 10:41:46 [INFO] [com.nahberger.todolist.persistance.inmemory.InMemoryToDoListRepository] [f7dac69b-d649-4d1c-9d88-e004ba6a11db] Fetching all ToDo entries with sort order: ASC
