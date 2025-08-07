@@ -64,7 +64,7 @@ java -jar target\todolist-runner.jar
 
 ---
 
-## 📮 REST API
+## 🔌 REST API
 
 Alle REST-Endpunkte sind unter dem Pfad:
 
